@@ -1,20 +1,4 @@
-const { Schema, model, Types } = require('mongoose');
-const dateFormat = require('../utils/dateFormat');
+const User = require('./User');
+const Thought = require('./Thought');
 
-const usernameSchema = new Schema (
-
-);
-
-const emailSchema = new Schema (
-
-);
-
-const thoughtSchema = new Schema (
-
-);
-
-const friendsSchema = new Schema (
-
-// virtual friendCount //
-
-);
+module.exports = { User, Thought }

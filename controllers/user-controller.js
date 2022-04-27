@@ -11,11 +11,11 @@ const userController = {
         })
         .select('-__v')
         .sort({ _id: -1 })
-            .then(dbUserData => res.json(dbUserData))
-            .catch(err => {
-                console.log(err);
-                res.status(400).json(err);
-        }   );
+        .then(dbUserData => res.json(dbUserData))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json(err);
+        });
     },
 
     getUserById({ params }, res) {
@@ -72,7 +72,7 @@ const userController = {
         User.findOneAndUpdate(
             { _id: params.userId },
             {$push: { friends: body }},
-            { new: true, runValidators: true }
+            { new: true }
         )
         .then(dbUserData => {
             if (!dbUserData) {

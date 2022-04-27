@@ -1,5 +1,5 @@
-const res = require('express/lib/resonse');
-const { Thought } = require('../models');
+const res = require('express/lib/response');
+const { Thought, User } = require('../models');
 
 // getAllThoughts,
 // getThoughtById,
@@ -12,7 +12,7 @@ const { Thought } = require('../models');
 const thoughtController = {
 
     getAllThoughts(req, res) {
-        User.find({})
+        Thought.find({})
         .populate({
             path: 'reactions',
             select: '-__v'
@@ -27,7 +27,7 @@ const thoughtController = {
     },
 
     getThoughtById({ params }, res) {
-        User.findOne({ _id: params.id })
+        Thought.findOne({ _id: params.id })
             .populate({ 
                 path: 'reactions',
                 select: '-__v'
@@ -47,13 +47,13 @@ const thoughtController = {
     },
 
     createThought({ body }, res) {
-        User.create(body)
+        Thought.create(body)
         .then(dbThoughtsData => res.json(dbThoughtsData))
         .catch(err => res.status(400).json(err));
     },
 
     updateThought({ params, body }, res) {
-        User.findOneAndUpdate({ _id: params.id }, body, {new: true, runValidators: true })
+        Thought.findOneAndUpdate({ _id: params.id }, body, {new: true, runValidators: true })
         .then(dbThoughtsData => {
             if (!dbThoughtsData) {
                 res.status(404).json({ message: 'No thought found with this id!' });
@@ -65,7 +65,7 @@ const thoughtController = {
     },
 
     deleteThought({ params }, res) {
-        User.findOneAndDelete({ _id: params.id })
+        Thought.findOneAndDelete({ _id: params.id })
         .then(dbThoughtsData => {
             if (!dbThoughtsData) {
                 res.status(404).json({ message: 'No thought found with this id!' });
@@ -77,7 +77,7 @@ const thoughtController = {
     },
 
     addReaction({ params, body }, res) {
-        User.findOneAndUpdate(
+        Thought.findOneAndUpdate(
             { _id: params.userId },
             {$push: { friends: body }},
             { new: true, runValidators: true }
@@ -93,7 +93,7 @@ const thoughtController = {
     },
 
     deleteReaction({ params }, res) {
-        User.findOneAndDelete({ _id: params.userId })
+        Thought.findOneAndDelete({ _id: params.userId })
             .then(deletedReaction => {
                 if (!deletedReaction) {
                     return res.status(400).json({ message: 'No reaction with this id! '});
@@ -116,3 +116,5 @@ const thoughtController = {
 
 
 }
+
+module.exports = thoughtController;
