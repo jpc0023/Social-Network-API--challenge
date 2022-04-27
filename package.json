@@ -1,0 +1,24 @@
+{
+  "name": "social-network-api--challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpc0023/Social-Network-API--challenge.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpc0023/Social-Network-API--challenge/issues"
+  },
+  "homepage": "https://github.com/jpc0023/Social-Network-API--challenge#readme",
+  "dependencies": {
+    "express": "^4.18.0",
+    "mongoose": "^6.3.1"
+  }
+}
